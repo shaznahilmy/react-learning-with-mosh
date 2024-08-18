@@ -1,16 +1,28 @@
-//import {MouseEvent} from "react";
+import { useState } from "react";
+
 function ListGroup() {
   let items = ["Paris", "Seoul", "Tokyo", "London", "Washington"];
-  //js compilor doesnt know the type of parameter event is, whether its  string/number etc
-  //const handleClick = () => console.log(event.);
+  const [selectedIndex, setSelectedIndex] = useState(-1);
   return (
     <>
       <h1>List</h1>
-      {items.length===0 && <p>No Item Found!</p>}
+
+      {items.length === 0 && <p>No Item Found!</p>}
+      
       <ul className="list-group">
-       {/*key helps to indentify each item so react can keep track of it */}
-        {items.map((item) => (
-          <li className="list-group-item" key={item} onClick={(event)=>console.log(event)}>{item}</li>
+        {/*key helps to indentify each item so react can keep track of it */}
+        {items.map((item, index) => (
+          <li
+            className={
+              selectedIndex === index
+                ? "list-group-item-active"
+                : "list-group-item"
+            }
+            key={item}
+            onClick={() => {setSelectedIndex(index),console.log(item)}}
+          >
+            {item}
+          </li>
         ))}
       </ul>
     </>
